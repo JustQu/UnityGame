@@ -404,6 +404,8 @@ MonoBehaviour:
   possibleEnemies:
   - {fileID: 6789938731645719271, guid: 6333613017b9b9e4db9097acd739e5df, type: 3}
   - {fileID: 6789938731645719271, guid: 6333613017b9b9e4db9097acd739e5df, type: 3}
+  goalPrefab: {fileID: 7131023388743262780, guid: d8fe6ae772a6cf744b1d23731ee8e6d7,
+    type: 3}
 --- !u!4 &1724054789
 Transform:
   m_ObjectHideFlags: 0

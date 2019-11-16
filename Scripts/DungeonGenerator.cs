@@ -179,6 +179,9 @@ public class DungeonGenerator : MonoBehaviour
 	[SerializeField]
 	private GameObject[] possibleEnemies;
 
+	[SerializeField]
+	private GameObject goalPrefab;
+
 	private Room[,] rooms;
 
 	private Room currentRoom;
@@ -248,6 +251,8 @@ public class DungeonGenerator : MonoBehaviour
 			AddNeighbors(currentRoom, roomsToCreate);
 		}
 
+		int maximumDistanceToInitialRoom = 0;
+		Room finalRoom = null;
 		foreach (Room room in createdRooms){
 			List<Vector2Int> neighborCoordinates = room.NeighborCoordinates();
 			foreach (Vector2Int coordinate in neighborCoordinates){
@@ -258,7 +263,18 @@ public class DungeonGenerator : MonoBehaviour
 			}
 			room.PopulateObstacles(this.numberOFObstacles, this.possibleObstacleSizes);
 			room.PopulatePrefabs(this.numberOfEnemies, this.possibleEnemies);
+
+			int distanceToInitialRoom =
+						Mathf.Abs(room.roomCoordinate.x - initialRoomCoordinate.x) +
+						Mathf.Abs(room.roomCoordinate.y - initialRoomCoordinate.y);
+			if (distanceToInitialRoom > maximumDistanceToInitialRoom){
+				maximumDistanceToInitialRoom = distanceToInitialRoom;
+				finalRoom = room;
+			}
 		}
+
+		GameObject[] goalPrefabs = { this.goalPrefab };
+		finalRoom.PopulatePrefabs(1, goalPrefabs);
 
 		return this.rooms[initialRoomCoordinate.x, initialRoomCoordinate.y];
 	}
@@ -314,5 +330,10 @@ public class DungeonGenerator : MonoBehaviour
 
 	public Room CurrentRoom(){
 		return this.currentRoom;
+	}
+
+	public void ResetDungeon()
+	{
+		this.currentRoom = GenerateDungeon();
 	}
 }
