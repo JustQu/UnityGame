@@ -399,6 +399,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numberOfRooms: 10
+  obstacleTile: {fileID: 11400000, guid: 61529f6271a6f674c8cfe50e86d0188a, type: 2}
+  numberOFObstacles: 3
 --- !u!4 &1724054789
 Transform:
   m_ObjectHideFlags: 0
