@@ -20,6 +20,9 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("Vertical", movement.y);
 
         animator.SetFloat("Speed", movement.sqrMagnitude);
+        if (movement.magnitude > 1)
+            movement /= movement.magnitude;
+
     }
 
     void FixedUpdate()

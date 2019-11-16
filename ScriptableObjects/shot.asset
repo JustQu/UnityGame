@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a8c0073aa9247742a9b7900831e8f26, type: 3}
+  m_Name: shot
+  m_EditorClassIdentifier: 
+  aName: test
+  aSprite: {fileID: 21300000, guid: 1141e8d156dfe85428339375f130fac4, type: 3}
+  aSound: {fileID: 0}
+  aBaseCoolDown: 1
+  projectileForce: 500
+  projectile: {fileID: 1884641094958967032, guid: e745fa5add33f11438b67622b0229ac7,
+    type: 3}
