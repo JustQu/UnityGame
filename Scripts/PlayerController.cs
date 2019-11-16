@@ -8,7 +8,13 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D rb;
     public Animator animator;
 
-    Vector2 movement;
+    private Vector2 movement;
+	static private Vector2 playerPosition;
+
+	private void Awake()
+	{
+		
+	}
 
     // Update is called once per frame
     void Update()
