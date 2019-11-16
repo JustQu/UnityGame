@@ -8,6 +8,8 @@ public class Room
 	public Vector2Int roomCoordinate;
 	public Dictionary<string, Room> neighbors;
 
+	private Dictionary<string, GameObject> name2Prefab;
+
 	private string[,] population;
 
 	public Room(int xCoordinate, int yCoordinate)
@@ -21,6 +23,7 @@ public class Room
 			}
 		}
 		this.population[7,4] = "Player";
+		this.name2Prefab = new Dictionary<string, GameObject>();
 	}
 
 	public Room(Vector2Int roomCoordinate)
@@ -34,6 +37,7 @@ public class Room
 			}
 		}
 		this.population[7,4] = "Player";
+		this.name2Prefab = new Dictionary<string, GameObject>();
 	}
 
 	public List<Vector2Int> NeighborCoordinates(){
@@ -100,7 +104,8 @@ public class Room
 		do{
 			region.Clear();
 
-			Vector2Int centerTile= new Vector2Int(UnityEngine.Random.Range(2, 9), UnityEngine.Random.Range(2, 3));
+			Vector2Int centerTile= new Vector2Int(UnityEngine.Random.Range(2, 11),
+													UnityEngine.Random.Range(2, 5));
 
 			region.Add(centerTile);
 
@@ -134,8 +139,25 @@ public class Room
 			for (int yIndex = 0; yIndex < 6; yIndex++){
 				if (this.population[xIndex, yIndex] == "Obstacle"){
 					tilemap.SetTile(new Vector3Int(xIndex - 6, yIndex - 3, 0), obstacleTile);
+				} else if (this.population[xIndex, yIndex] != "" &&
+							this.population[xIndex, yIndex] != "Player"){
+					GameObject prefab =
+						GameObject.Instantiate(this.name2Prefab[this.population[xIndex, yIndex]]);
+					prefab.transform.position = new Vector3(xIndex - 6 + 0.5f, yIndex - 5 + 0.5f, -1);
 				}
 			}
+		}
+	}
+
+	public void PopulatePrefabs(int numberOfPrefabs, GameObject[] possiblePrefabs)
+	{
+		for (int prefabIndex = 0; prefabIndex < numberOfPrefabs; prefabIndex++){
+			int choiseIndex = Random.Range(0, possiblePrefabs.Length);
+			GameObject prefab = possiblePrefabs[choiseIndex];
+			List<Vector2Int> region = FindFreeRegion(new Vector2Int(1, 1));
+
+			this.population[region[0].x, region[0].y] = prefab.name;
+			this.name2Prefab[prefab.name] = prefab;
 		}
 	}
 }
@@ -150,6 +172,12 @@ public class DungeonGenerator : MonoBehaviour
 
 	[SerializeField]
 	private int numberOFObstacles;
+	
+	[SerializeField]
+	private int numberOfEnemies;
+
+	[SerializeField]
+	private GameObject[] possibleEnemies;
 
 	private Room[,] rooms;
 
@@ -229,6 +257,7 @@ public class DungeonGenerator : MonoBehaviour
 				}
 			}
 			room.PopulateObstacles(this.numberOFObstacles, this.possibleObstacleSizes);
+			room.PopulatePrefabs(this.numberOfEnemies, this.possibleEnemies);
 		}
 
 		return this.rooms[initialRoomCoordinate.x, initialRoomCoordinate.y];
