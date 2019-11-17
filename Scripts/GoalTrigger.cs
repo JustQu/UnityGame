@@ -3,16 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class EnterDoor : MonoBehaviour
+public class GoalTrigger : MonoBehaviour
 {
-	private void OnCollisionEnter2D(Collision2D other) {
-		if (other.gameObject.CompareTag("Player")){
+    void OnTriggerEnter2D(Collider2D col)
+	{
+		if (col.gameObject.CompareTag("Player")){
 			GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 			if (enemies.Length == 0){
 				GameObject dungeon = GameObject.FindGameObjectWithTag("Dungeon");
 				DungeonGenerator dungeonGenerator = dungeon.GetComponent<DungeonGenerator>();
-				Room room = dungeonGenerator.CurrentRoom();
-				dungeonGenerator.MoveToRoom(room.Neighbor((this.name[5]).ToString()));
+				dungeonGenerator.ResetDungeon();
 				SceneManager.LoadScene("Demo");
 			}
 		}
