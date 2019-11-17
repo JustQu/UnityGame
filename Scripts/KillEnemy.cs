@@ -6,7 +6,8 @@ public class KillEnemy : MonoBehaviour
 {
     /* тут надо будет все поменять */
 	void OnTriggerEnter2D(Collider2D col){
-		if (col.gameObject.CompareTag("Player")){
+		if (col.gameObject.CompareTag("Projectile")){
+			Destroy(col.gameObject);
 			Destroy(this.gameObject);
 		}
 	}

@@ -36,7 +36,7 @@ public class Room
 				this.population[xIndex, yIndex] = "";
 			}
 		}
-		this.population[7,4] = "Player";
+		this.population[6,3] = "Player";
 		this.name2Prefab = new Dictionary<string, GameObject>();
 	}
 
