@@ -8,13 +8,14 @@ public class AbilityCoolDown : MonoBehaviour
     public string abilityButtonName = "ButtonName";
     public Image darkMask;
 
-    [SerializeField] private Ability ability;
+    public Ability ability;
     [SerializeField] private GameObject weaponHolder;
     private Image myButtonImage;
     private AudioSource abilitySource;
     private float coolDownDuration;
     private float nextReadyTime;
     private float coolDownTimeLeft;
+    private Ability aSelected;
 
     void Start()
     {
@@ -31,10 +32,13 @@ public class AbilityCoolDown : MonoBehaviour
         coolDownDuration = ability.aBaseCoolDown;
         ability.Initialize(weaponHolder);
         AbilityReady();
+        aSelected = selectedAbility;
     }
 
     void Update()
     {
+        if (ability != aSelected)
+            Initialize(ability, weaponHolder);
         bool coolDownComplete = (Time.time > nextReadyTime);
         if(coolDownComplete)
         {
