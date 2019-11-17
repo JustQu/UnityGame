@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a8c0073aa9247742a9b7900831e8f26, type: 3}
-  m_Name: shot
+  m_Name: shot 1
   m_EditorClassIdentifier: 
   aName: test
-  aSprite: {fileID: 21300000, guid: 1141e8d156dfe85428339375f130fac4, type: 3}
+  aSprite: {fileID: 21300000, guid: be6493479c9438345a3d512a5bbd5661, type: 3}
   aSound: {fileID: 0}
-  aBaseCoolDown: 0.1
-  projectileForce: 500
+  aBaseCoolDown: 3
+  projectileForce: 200
   projectile: {fileID: 1884641094958967032, guid: e745fa5add33f11438b67622b0229ac7,
     type: 3}
