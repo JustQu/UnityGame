@@ -16,7 +16,13 @@ public class ProjectileController : MonoBehaviour
 	{
 		//потом доделать
 		if (target != null){
-			//transform.position = Vector3.MoveTowards();
+			transform.position = Vector3.MoveTowards(transform.position, target, -1);
+		}
+	}
+
+	private void OnTriggerEnter2D(Collider2D other) {
+		if (other.CompareTag("Enemy")){
+			//
 		}
 	}
 }
